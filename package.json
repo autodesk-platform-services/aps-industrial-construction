@@ -1,13 +1,12 @@
 {
-  "name": "forge-industrial-construction",
+  "name": "aps-industrial-construction",
   "version": "0.5.0",
-  "description": "Autodesk Forge application demonstrating possible usage in industrial construction.",
+  "description": "Autodesk Platform Services application demonstrating possible usage in industrial construction.",
   "scripts": {
     "start": "node server.js"
   },
   "keywords": [
-    "autodesk",
-    "forge",
+    "autodesk-platform-services",
     "industrial",
     "construction"
   ],

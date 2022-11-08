@@ -1,10 +1,10 @@
 const express = require('express');
 const path = require('path');
 
-const { FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, FORGE_BUCKET, GOOGLE_MAPS_API_KEY, MONGODB_URL } = process.env;
-if (!FORGE_CLIENT_ID || !FORGE_CLIENT_SECRET || !FORGE_BUCKET || !GOOGLE_MAPS_API_KEY || !MONGODB_URL) {
+const { APS_CLIENT_ID, APS_CLIENT_SECRET, APS_BUCKET, GOOGLE_MAPS_API_KEY, MONGODB_URL } = process.env;
+if (!APS_CLIENT_ID || !APS_CLIENT_SECRET || !APS_BUCKET || !GOOGLE_MAPS_API_KEY || !MONGODB_URL) {
     console.warn('Following env. variables must be provided in order to run this application:');
-    console.warn('FORGE_CLIENT_ID, FORGE_CLIENT_SECRET, FORGE_BUCKET, GOOGLE_MAPS_API_KEY, MONGODB_URL');
+    console.warn('APS_CLIENT_ID, APS_CLIENT_SECRET, APS_BUCKET, GOOGLE_MAPS_API_KEY, MONGODB_URL');
     return;
 }
 

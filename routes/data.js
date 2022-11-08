@@ -5,7 +5,7 @@ const Issue = require('../model/issue');
 const IssueTableLimit = 256;
 
 let router = express.Router();
-let auth = new AuthenticationClient(process.env.FORGE_CLIENT_ID, process.env.FORGE_CLIENT_SECRET);
+let auth = new AuthenticationClient(process.env.APS_CLIENT_ID, process.env.APS_CLIENT_SECRET);
 let data = new DataManagementClient(auth);
 
 const FacilityData = [
@@ -58,7 +58,7 @@ router.get('/facilities', async function(req, res) {
 
 router.get('/facilities/:facility', async function(req, res) {
     try {
-        const objects = await data.objects(process.env.FORGE_BUCKET);
+        const objects = await data.objects(process.env.APS_BUCKET);
         const areas = {};
         for (const object of objects) {
             const match = object.objectKey.match(/^(\w+)\-(\d+)\-(\w+)\.nwd$/);
