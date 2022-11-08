@@ -10,7 +10,7 @@
 
 [Autodesk Platform Services](https://aps.autodesk.com) sample application demonstrating features relevant to the area of industrial construction.
 
-![Thumbnail](thumbnail.gif)
+![Screenshot](screenshot.png)
 
 ## Live demo
 
