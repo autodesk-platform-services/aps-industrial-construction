@@ -10,7 +10,6 @@
     "industrial",
     "construction"
   ],
-  "author": "Petr Broz <petr.broz@autodesk.com>",
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.4",

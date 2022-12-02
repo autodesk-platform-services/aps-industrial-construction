@@ -1,4 +1,4 @@
-# aps-industrial-construction
+# Industrial Construction Demo
 
 ![Platforms](https://img.shields.io/badge/platform-Windows|MacOS-lightgray.svg)
 ![Node.js](https://img.shields.io/badge/node-%3E%3D%2010.0.0-brightgreen.svg)
@@ -10,7 +10,7 @@
 
 [Autodesk Platform Services](https://aps.autodesk.com) sample application demonstrating features relevant to the area of industrial construction.
 
-![Screenshot](screenshot.png)
+![Screenshot](thumbnail.png)
 
 ## Live demo
 
