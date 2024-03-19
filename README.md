@@ -25,6 +25,27 @@ Master branch is deployed to https://aps-industrial-construction.autodesk.io
 - MongoDB database
   - for example, using the free tier of [MongoDB Atlas](https://www.mongodb.com/cloud/atlas)
   - or running MongoDB locally: https://docs.mongodb.com/manual/installation
+- Sample data, see below
+
+### Sample Data
+
+This demo expects your 3D designs stored in APS to be named in a specific way:
+
+`<facility>-<area>-<type>.nwd`
+
+Where `<facility>` can be either `el` or `montreal` (these two names are currently hard-coded), `<area>` is an arbitrary number,
+and `<type>` is an arbitrary word describing the type of data in the design. Here's some examples:
+
+- `el-100-electrical.nwd`
+- `el-200-structural.nwd`
+- `montreal-300-electrical.nwd`
+- `montreal-400-structural.nwd`
+
+With this naming, the application is able to present a matrix of checkboxes representing individual area codes and disciplines,
+and load their corresponding designs on demand.
+
+> You can modify the hard-coded facilities [here](https://github.com/autodesk-platform-services/aps-industrial-construction/blob/master/routes/data.js#L11-L33),
+> and the parsing of design names [here](https://github.com/autodesk-platform-services/aps-industrial-construction/blob/master/routes/data.js#L64-L73).
 
 ### Setup & Running
 
