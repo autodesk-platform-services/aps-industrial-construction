@@ -1,9 +1,8 @@
 async function initViewer(facility) {
     async function getAccessToken(callback) {
         const resp = await fetch('/api/auth/token');
-        const json = await resp.json();
-        const token = json.access_token;
-        callback(token.access_token, token.expires_in);
+        const { access_token, expires_in } = await resp.json();
+        callback(access_token, expires_in);
     }
     await Autodesk.Viewing.Utilities.Initialize(document.getElementById('viewer'), getAccessToken);
     const viewer = NOP_VIEWER;

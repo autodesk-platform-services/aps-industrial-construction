@@ -1,12 +1,15 @@
 const express = require('express');
-const { AuthenticationClient, DataManagementClient } = require('forge-nodejs-utils');
-
+const { SdkManagerBuilder } = require('@aps_sdk/autodesk-sdkmanager');
+const { AuthenticationClient, Scopes } = require('@aps_sdk/authentication');
+const { OssClient } = require('@aps_sdk/oss');
+const { APS_CLIENT_ID, APS_CLIENT_SECRET, APS_BUCKET } = process.env;
 const Issue = require('../model/issue');
 const IssueTableLimit = 256;
 
 let router = express.Router();
-let auth = new AuthenticationClient(process.env.APS_CLIENT_ID, process.env.APS_CLIENT_SECRET);
-let data = new DataManagementClient(auth);
+let sdkManager = SdkManagerBuilder.create().build();
+let auth = new AuthenticationClient(sdkManager);
+let oss = new OssClient(sdkManager);
 
 const FacilityData = [
     {
@@ -48,6 +51,18 @@ function countIssues() {
     });
 }
 
+async function listObjects(bucketKey) {
+    const credentials = await auth.getTwoLeggedToken(APS_CLIENT_ID, APS_CLIENT_SECRET, [Scopes.DataRead]);
+    let resp = await oss.getObjects(credentials.access_token, bucketKey, { limit: 64 });
+    let objects = resp.items;
+    while (resp.next) {
+        const startAt = new URL(resp.next).searchParams.get('startAt');
+        resp = await oss.getObjects(credentials.access_token, bucketKey, { startAt, limit: 64 });
+        objects = objects.concat(resp.items);
+    }
+    return objects;
+}
+
 router.get('/facilities', async function(req, res) {
     try {
         res.json(FacilityData);
@@ -58,7 +73,7 @@ router.get('/facilities', async function(req, res) {
 
 router.get('/facilities/:facility', async function(req, res) {
     try {
-        const objects = await data.objects(process.env.APS_BUCKET);
+        const objects = await listObjects(APS_BUCKET);
         const areas = {};
         for (const object of objects) {
             const match = object.objectKey.match(/^(\w+)\-(\d+)\-(\w+)\.nwd$/);
